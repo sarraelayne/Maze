@@ -71,17 +71,20 @@ bool Pathfinder::importMaze(string file_name) {
 }
 vector<string> Pathfinder::solveMaze() {
     vector<string> solution;
+    int const WALL = 0;
+    int const PATH = 1;
+    int const PREV = 2;
+    int const TRIED = 3;
     
-    /*if (outside of maze||not valid path|| been there before)
+    /*if (maze[xyz] == 0 || 2 || 3 ||outside of maze)
         pop_back
-        return false
-      if ( end of maze) {
-          return true; YAY
+        return false;
+      if (location == maze[4][4][4]) {
+          return solution;
       }
-      maze[x][y][z] = 2;
-      if (up||down||left||right||in||out == 1) {
+      maze[x][y][z] = PREV;
+      if (maze[xyz] == 1) {
           go there
-          return true;
       }
       else {
           pop_back
@@ -89,6 +92,4 @@ vector<string> Pathfinder::solveMaze() {
       }
     
     */
-    
-    return solution;
 }
