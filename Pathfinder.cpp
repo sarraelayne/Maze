@@ -5,7 +5,6 @@
 using namespace std;
 
 string Pathfinder::toString() const {
-    string currMaze;
     int mazeSize = 125;
     int rows = 5;
     int cols = 5;
@@ -16,24 +15,57 @@ string Pathfinder::toString() const {
         }
     }
     
-    
-    if (!isValid) {
+    */
+    if (!isValid(currMaze)) {
         return "invalid maze";
     }
     else {
         return currMaze;
     }
-*/
 }
-bool Pathfinder::isValid() {
-    
+bool Pathfinder::isValid(string currMaze) {
+    if (/*correct maze structure*/) {
+       if (maze[4][4][4] == 1 && maze[0][0][0] == 1) {
+           return true;
+       }
+       else {
+           return false;
+       }
+    }
+    else {
+        return false;
+    }
 }
 void Pathfinder::createRandomMaze() {
+    int mazeDigit;
     
-     return "maze created";
+    for (int i = 0; i < 5; i++) {
+        for (int j = 0; j < 5; j++) {
+            for (int k = 0; k < 5; k++) {
+                mazeDigit = rand() % 2;
+            }
+        }
+    }
+    maze[0][0][0] = 1;
+    maze[4][4][4] = 1;
+    
+    return "maze created";
 }
 bool Pathfinder::importMaze(string file_name) {
-    bool importStat;
+    bool importStat = true;
+    ifstream importFile;
+    
+    importFile.open("file_name");
+    if (!importFile.is_open()) {
+        importStat = false;
+    }
+    else {
+        currMaze = importFile;
+        if (!isValid(currMaze)) {
+            importStat = false;
+        }
+    }
+    importFile.close();
     
     return importStat;
 }

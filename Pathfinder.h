@@ -13,5 +13,7 @@ class Pathfinder: public PathfinderInterface{
 	void createRandomMaze();
 	bool importMaze(string file_name);
 	vector<string> solveMaze();
-	bool isValid();
+	bool isValid(string currMaze);
+	protected:
+	string currMaze;
 };
