@@ -2,10 +2,11 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <fstream>
+#include <sstream>
 using namespace std;
 
 string Pathfinder::toString() const {
-    int mazeSize = 125;
     stringstream ss;
     
     for(int i = 0; i < HEIGHT; i++) {
@@ -103,7 +104,6 @@ bool Pathfinder::importMaze(string file_name) {
 }
 
 vector<string> Pathfinder::solveMaze() {
-    vector<string> solution;
     int const WALL = 0;
     int const PATH = 1;
     int const PREV = 2;
