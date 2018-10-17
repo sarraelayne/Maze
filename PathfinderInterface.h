@@ -19,17 +19,14 @@ public:
 	*
 	* Returns a string representation of the current maze. Returns a maze of all 1s if no maze
 	* has yet been generated or imported.
-	*
 	* A valid string representation of a maze consists only of 125 1s and 0s (each separated
 	* by spaces) arranged in five 5x5 grids (each separated by newlines) with no trailing newline. A valid maze must
 	* also have 1s in the entrance cell (0, 0, 0) and in the exit cell (4, 4, 4).
-	*
 	* Cell (0, 0, 0) is represented by the first number in the string representation of the
 	* maze. Increasing in x means moving toward the east, meaning cell (1, 0, 0) is the second
 	* number. Increasing in y means moving toward the south, meaning cell (0, 1, 0) is the
 	* sixth number. Increasing in z means moving downward to a new grid, meaning cell
 	* (0, 0, 1) is the twenty-sixth cell in the maze. Cell (4, 4, 4) is represented by the last number.
-	*
 	* Returns:		string
 	*				A single string representing the current maze
 	*/

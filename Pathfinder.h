@@ -14,6 +14,10 @@ class Pathfinder: public PathfinderInterface{
 	bool importMaze(string file_name);
 	vector<string> solveMaze();
 	bool isValid(string currMaze);
+	
 	protected:
 	string currMaze;
+	int const ROWS = 5;
+    int const COLS = 5;
+    int const HEIGHT = 5;
 };
