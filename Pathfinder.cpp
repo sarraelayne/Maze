@@ -6,16 +6,21 @@ using namespace std;
 
 string Pathfinder::toString() const {
     int mazeSize = 125;
-    int rows = 5;
-    int cols = 5;
+    int const ROWS = 5;
+    int const COLS = 5;
+    int const HEIGHT = 5;
+    stringstream ss;
     
-    /* if (no maze) {
-        for (int i = 0; i < mazeSize; i++) {
-            maze[x][y][z] == 1;
+    for(int i = 0; i < HEIGHT; i++) {
+        for(int j = 0; j < ROWS; j++) {
+            for (int k = 0; k < COLS; k++) {
+                ss << maze[i][j][k] << " ";
+            }
+            ss << endl;
         }
+        ss << endl;
     }
-    
-    */
+    currMaze = ss;
     if (!isValid(currMaze)) {
         return "invalid maze";
     }
