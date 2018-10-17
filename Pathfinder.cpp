@@ -7,6 +7,7 @@
 using namespace std;
 
 string Pathfinder::toString() const {
+    string mazeString;
     stringstream ss;
     
     for(int i = 0; i < HEIGHT; i++) {
@@ -18,13 +19,8 @@ string Pathfinder::toString() const {
         }
         ss << endl;
     }
-    currMaze = ss;
-    if (!isValid(currMaze)) {
-        return "invalid maze";
-    }
-    else {
-        return currMaze;
-    }
+    mazeString = ss.str();
+    return mazeString;
 }
 bool Pathfinder::isValid(string currMaze) {
     int height;
@@ -65,7 +61,7 @@ void Pathfinder::createRandomMaze() {
         }
         cout << endl;
     }
-    return "maze created";
+    return;
 }
 bool Pathfinder::importMaze(string file_name) {
     bool importStat = true;
@@ -92,9 +88,6 @@ bool Pathfinder::importMaze(string file_name) {
             }
             getline(importFile, line);
             cout << line << endl;
-        }
-        if (!isValid(currMaze)) {
-            importStat = false;
         }
     }
     importFile.close();
