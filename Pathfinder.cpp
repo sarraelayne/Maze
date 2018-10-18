@@ -35,22 +35,7 @@ string Pathfinder::toString() const {
     }
     return ss.str();
 }
-bool Pathfinder::isValid(string currMaze) {
-    int height;
-    int rows;
-    int cols;
-    if ((height == HEIGHT) && (rows == ROWS) && (cols == COLS)) {
-       if (maze[4][4][4] == 1 && maze[0][0][0] == 1) {
-           return true;
-       }
-       else {
-           return false;
-       }
-    }
-    else {
-        return false;
-    }
-}
+
 void Pathfinder::createRandomMaze() {
     int mazeDigit;
     srand(time(NULL));
@@ -65,18 +50,16 @@ void Pathfinder::createRandomMaze() {
     }
     maze[0][0][0] = 1;
     maze[4][4][4] = 1;
-    cout << "Maze: " << endl;
-    for(int i = 0; i < HEIGHT; i++) {
+    //cout << "Maze: " << endl;
+    /*for(int i = 0; i < HEIGHT; i++) {
         for(int j = 0; j < ROWS; j++) {
             for (int k = 0; k < COLS; k++) {
                 cout << maze[k][j][i] << " ";
             }
         }
-    }
-    return;
+    }*/
 }
 bool Pathfinder::importMaze(string file_name) {
-    bool importStat = true;
     ifstream importFile;
     string line;
     char token;
@@ -92,17 +75,6 @@ bool Pathfinder::importMaze(string file_name) {
     
     
     if(importFile.is_open()){
-        if ((height == HEIGHT) && (rows == ROWS) && (cols == COLS)) {
-            if (maze[4][4][4] == 1 && maze[0][0][0] == 1) {
-                importStat = true;
-            }
-            else {
-                importStat = false;
-            }
-        }
-        else {
-            importStat = false;
-        }
         while(importFile >> token){
             if(token == '1'){
                 one_count++;
@@ -112,45 +84,55 @@ bool Pathfinder::importMaze(string file_name) {
                 zero_count++;
                 count++;
             }
+            else {
+                return false;
+            }
         }
-        
         importFile.close();
     } 
-    importFile.open(file_name);
-    if (!importFile.is_open()) {
-        importStat = false;
+    else {
+        return false;
     }
     if(count!=125){
+        return false;
+    }
+    cout << "error checked" << endl;
+    importFile.open(file_name);
+    if (!importFile.is_open()) {
         return false;
     }
     else {
         for (int i = 0; i < HEIGHT; i++) {
             for(int j = 0; j < ROWS; j++) {
+                line = "";
                 getline(importFile, line);
                 stringstream ss(line);
                 for(int k = 0; k < COLS; k++) {
-                    
                     int value;
                     ss >> value;
+                    if (i == 0 && j == 0 && k == 0) {
+                        if (value == 0) {
+                            return false;
+                        }
+                    }
+                    if (i == 4 && j == 4 && k == 4) {
+                        if (value == 0) {
+                            return false;
+                        }
+                    }
                     if(ss.fail()) {
                         return false;
                     }
                     maze[k][j][i] = value;
-                    importStat = true;
                 }
+                ss.str("");
             }
             getline(importFile, line);
         }
         
     }
+    cout << "imported" << endl;
     importFile.close();
-    
-    if (maze[4][4][4] == 1 && maze[0][0][0] == 1) {
-        importStat = true;
-    }
-    else {
-        importStat = false;
-    }
     
    /* for(int i = 0; i < 5; i++){
       for(int j = 0; j < 5; j++){
@@ -164,7 +146,7 @@ bool Pathfinder::importMaze(string file_name) {
       }
     }
     */
-    return importStat;
+    return true;
 }
 bool Pathfinder::findPath(int x, int y, int z) {
     //base cases:
@@ -174,11 +156,11 @@ bool Pathfinder::findPath(int x, int y, int z) {
     else if (maze[z][y][x] == WALL || maze[z][y][x] == PREV) {
         return false;
     }
-    else if (z = HEIGHT - 1 && y == ROWS - 1 && x == COLS - 1) {
+    else if (z == 4 && y == 4 && x == 4) {
         solution.push_back("(4, 4, 4)");
         return true;
     }
-    solution.push_back("(" + to_string(z) + ", " + to_string(y) + ", " + to_string(x) + ")")
+    solution.push_back("(" + to_string(z) + ", " + to_string(y) + ", " + to_string(x) + ")");
     maze[z][y][x] = PREV;
     
     if(findPath(x - 1, y, z)) {
@@ -207,16 +189,17 @@ bool Pathfinder::findPath(int x, int y, int z) {
 }
 
 vector<string> Pathfinder::solveMaze() {
+    cout << "in solveMaze" << endl;
     solution.clear();
     findPath(0, 0, 0);
     for (int k = 0; k < HEIGHT; k++) {
         for (int j = 0; j < ROWS; j++) {
-            for (int i = 0; i < COLS; i++ {
+            for (int i = 0; i < COLS; i++) {
                 if (maze[i][j][k] == 2) {
                     maze[i][j][k] = 1;
                 }
             }
         }
     }
-    
+    return solution;
 }
