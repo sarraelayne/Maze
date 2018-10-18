@@ -43,6 +43,7 @@ bool Pathfinder::isValid(string currMaze) {
 }
 void Pathfinder::createRandomMaze() {
     int mazeDigit;
+    srand(time(NULL));
     
     for (int i = 0; i < HEIGHT; i++) {
         for (int j = 0; j < ROWS; j++) {
@@ -68,20 +69,58 @@ bool Pathfinder::importMaze(string file_name) {
     bool importStat = true;
     ifstream importFile;
     string line;
+    char token;
+    int one_count=0;
+    int zero_count=0;
+    int count = 0;
+    int height;
+    int rows;
+    int cols;
     
     cout << "importing maze"<< endl;
     importFile.open(file_name.c_str());
     
+    /*
+    if(importFile.is_open()){
+        while(importFile >> token){
+            if(token == '1'){
+                one_count++;
+                count++;
+            } 
+            else if(token == '0'){
+                zero_count++;
+                count++;
+            }
+        }
+        if ((height == HEIGHT) && (rows == ROWS) && (cols == COLS)) {
+            if (maze[4][4][4] == 1 && maze[0][0][0] == 1) {
+                importStat = true;
+            }
+            else {
+                importStat = false;
+            }
+        }
+        else {
+            importStat = false;
+        }
+        importFile.close();
+    } */
     if (!importFile.is_open()) {
         importStat = false;
     }
+    
+    /*
+    if(count!=125){
+        return false;
+    }*/
+    //125 characters of number
     else {
         for (int i = 0; i < HEIGHT; i++) {
             for(int j = 0; j < ROWS; j++) {
-                line = "";
                 getline(importFile, line);
                 stringstream ss(line);
                 for(int k = 0; k < COLS; k++) {
+                    
                     int value;
                     ss >> value;
                     maze[i][j][k] = value;
@@ -89,12 +128,22 @@ bool Pathfinder::importMaze(string file_name) {
                 }
             }
             getline(importFile, line);
-            cout << line << endl;
         }
     }
     importFile.close();
-    
-    cout << "Imported: " << importStat << endl;
+    /*
+    for(int i = 0; i < 5; i++){
+      for(int j = 0; j < 5; j++){
+        for(int k = 0; k < 5; k++){
+          cout << maze[k][j][i];
+          if(k < 4){
+            cout << " ";
+          }
+        }
+        cout << endl;
+      }
+    }
+    */
     return importStat;
 }
 
