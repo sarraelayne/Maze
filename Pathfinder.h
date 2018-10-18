@@ -16,7 +16,7 @@ class Pathfinder: public PathfinderInterface{
 	void createRandomMaze();
 	bool importMaze(string file_name);
 	vector<string> solveMaze();
-	bool isValid(string currMaze);
+	bool findPath(int x, int y, int z);
 	
 	protected:
 	int maze[5][5][5];
@@ -24,5 +24,9 @@ class Pathfinder: public PathfinderInterface{
 	int const ROWS = 5;
     int const COLS = 5;
     int const HEIGHT = 5;
+    int const WALL = 0;
+    int const PATH = 1;
+    int const PREV = 2;
+    int const TRIED = 3;
     vector<string> solution;
 };

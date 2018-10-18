@@ -166,32 +166,57 @@ bool Pathfinder::importMaze(string file_name) {
     */
     return importStat;
 }
+bool Pathfinder::findPath(int x, int y, int z) {
+    //base cases:
+    if(x < 0 || y < 0 || z < 0 || x > 4 || y > 4 || z > 4) {
+        return false;
+    }
+    else if (maze[z][y][x] == WALL || maze[z][y][x] == PREV) {
+        return false;
+    }
+    else if (z = HEIGHT - 1 && y == ROWS - 1 && x == COLS - 1) {
+        solution.push_back("(4, 4, 4)");
+        return true;
+    }
+    solution.push_back("(" + to_string(z) + ", " + to_string(y) + ", " + to_string(x) + ")")
+    maze[z][y][x] = PREV;
+    
+    if(findPath(x - 1, y, z)) {
+        return true;
+    }
+    else if (findPath(x + 1, y, z)) {
+        return true;
+    }
+    else if (findPath(x, y - 1, z)) {
+        return true;
+    }
+    else if (findPath(x, y + 1, z)) {
+        return true;
+    }
+    else if (findPath(x, y, z - 1)) {
+        return true;
+    }
+    else if (findPath(x, y, z + 1)) {
+        return true;
+    }
+    else {
+        solution.pop_back();
+        return false;
+    }
+  return false;
+}
 
 vector<string> Pathfinder::solveMaze() {
-    int const WALL = 0;
-    int const PATH = 1;
-    int const PREV = 2;
-    int const TRIED = 3;
-    //base cases:
-    /*
-  
-    if (maze[xyz] == outside of maze) {//outside of maze
-        return false;
-    }
-    else if (maze[xyz] == 0 || 3 ||) { //Wall or dead end
-        return false;
-    }
-    else if (location == maze[4][4][4]) { 
-        solution.push_back();
-        return solution;
-    }
-    else if () {
-        maze[xyz] = PATH; 
-        if ((mazePath == h, r-1, c) || (mazePath == h, r+1, c)
-           || (mazePath == h, r, c+1) || (mazePath == h, r, c-1)
-           || (mazePath == h+1, r, c) || (mazePath == h-1, r, c)) {
-            solution.push_back();
+    solution.clear();
+    findPath(0, 0, 0);
+    for (int k = 0; k < HEIGHT; k++) {
+        for (int j = 0; j < ROWS; j++) {
+            for (int i = 0; i < COLS; i++ {
+                if (maze[i][j][k] == 2) {
+                    maze[i][j][k] = 1;
+                }
             }
+        }
     }
-    */
+    
 }
