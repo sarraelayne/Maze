@@ -7,20 +7,24 @@
 using namespace std;
 
 string Pathfinder::toString() const {
-    string mazeString;
     stringstream ss;
     
     for(int i = 0; i < HEIGHT; i++) {
         for(int j = 0; j < ROWS; j++) {
             for (int k = 0; k < COLS; k++) {
-                ss << maze[i][j][k] << " ";
+                ss << maze[i][j][k];
+                if (k < 4) {
+                    ss << " ";
+                }
             }
             ss << endl;
         }
-        ss << endl;
+        if(i < 5) {
+            ss << endl;
+        }
     }
-    mazeString = ss.str();
-    return mazeString;
+    cout << ss.str();
+    return ss.str();
 }
 bool Pathfinder::isValid(string currMaze) {
     int height;
@@ -57,9 +61,7 @@ void Pathfinder::createRandomMaze() {
             for (int k = 0; k < COLS; k++) {
                 cout << maze[i][j][k] << " ";
             }
-            cout << endl;
         }
-        cout << endl;
     }
     return;
 }
@@ -101,21 +103,26 @@ vector<string> Pathfinder::solveMaze() {
     int const PATH = 1;
     int const PREV = 2;
     int const TRIED = 3;
-    
-    /*if (maze[xyz] == 0 || 2 || 3 ||outside of maze)
-        pop_back
+    //base cases:
+    /*
+  
+    if (maze[xyz] == outside of maze) {//outside of maze
         return false;
-      if (location == maze[4][4][4]) {
-          return solution;
-      }
-      maze[x][y][z] = PREV;
-      if (maze[xyz] == 1) {
-          go there
-      }
-      else {
-          pop_back
-          return false;
-      }
-    
+    }
+    else if (maze[xyz] == 0 || 3 ||) { //Wall or dead end
+        return false;
+    }
+    else if (location == maze[4][4][4]) { 
+        solution.push_back();
+        return solution;
+    }
+    else if () {
+        maze[xyz] = PATH; 
+        if ((mazePath == h, r-1, c) || (mazePath == h, r+1, c)
+           || (mazePath == h, r, c+1) || (mazePath == h, r, c-1)
+           || (mazePath == h+1, r, c) || (mazePath == h-1, r, c)) {
+            solution.push_back();
+            }
+    }
     */
 }
