@@ -9,7 +9,7 @@ using namespace std;
 
 class Pathfinder: public PathfinderInterface{
     public:
-	Pathfinder() {}
+	Pathfinder();
 	~Pathfinder() {}
 	
     string toString() const;
