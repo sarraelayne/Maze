@@ -19,11 +19,10 @@ string Pathfinder::toString() const {
             }
             ss << endl;
         }
-        if(i < 5) {
+        if(i < 4) {
             ss << endl;
         }
     }
-    cout << ss.str();
     return ss.str();
 }
 bool Pathfinder::isValid(string currMaze) {
@@ -79,6 +78,7 @@ bool Pathfinder::importMaze(string file_name) {
     else {
         for (int i = 0; i < HEIGHT; i++) {
             for(int j = 0; j < ROWS; j++) {
+                line = "";
                 getline(importFile, line);
                 stringstream ss(line);
                 for(int k = 0; k < COLS; k++) {
